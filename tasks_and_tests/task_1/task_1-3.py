@@ -109,7 +109,7 @@ def test_insert():
     s_list.add_in_tail(n2)
     s_list.add_in_tail(n3)
     s_list.add_in_tail(n4)
-    
+
     n5 = Node(5)
     s_list.insert(n1, n5)
     assert s_list.find(5) == n5

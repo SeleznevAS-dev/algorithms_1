@@ -1,5 +1,6 @@
 from tasks_and_tests.task_1.task_1 import LinkedList, Node
 
+
 # Course task number: 1
 # Lesson task number: 1.8
 # Short name: sum_two_linked_lists
@@ -22,21 +23,21 @@ def sum_two_linked_lists(list1: LinkedList, list2: LinkedList):
 
         return result
 
+
 def test_sum_two_linked_lists():
     list1 = LinkedList()
     list2 = LinkedList()
-    
+
     n1 = Node(2)
     n2 = Node(4)
     list1.add_in_tail(n1)
     list1.add_in_tail(n2)
-    
+
     n3 = Node(2)
     n4 = Node(4)
     list2.add_in_tail(n3)
     list2.add_in_tail(n4)
-    
-    list3 = sum_two_linked_lists(list1,list2)
+
+    list3 = sum_two_linked_lists(list1, list2)
     assert list3.head.value == 4
     assert list3.tail.value == 8
-    
