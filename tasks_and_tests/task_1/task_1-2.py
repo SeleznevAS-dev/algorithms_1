@@ -1,4 +1,4 @@
-from tasks_and_tests.task_1.task_1 import LinkedList, Node
+from .task_1 import LinkedList, Node
 
 
 # Course task number: 1

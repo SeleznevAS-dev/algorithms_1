@@ -18,7 +18,7 @@ class LinkedList:
 
     def print_all_nodes(self):
         node = self.head
-        while node != None:
+        while node is None:
             print(node.value)
             node = node.next
 
