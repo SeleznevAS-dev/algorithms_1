@@ -210,3 +210,5 @@ __marimo__/
 .history/
 
 .vscode
+
+logging_config.py
