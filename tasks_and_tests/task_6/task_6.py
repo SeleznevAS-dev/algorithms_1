@@ -109,13 +109,17 @@ class Deque:
         self.deque_size += 1
 
     def removeFront(self):
-        if self.deque_size > 0:
-            item = self.deque.head.value
-            self.deque.head = self.deque.head.next
-            self.deque_size -= 1
-            return item
+        if self.deque_size == 0:
+            return None
 
-        return None
+        item = self.deque.head.value
+        if self.deque_size == 1:
+            self.deque.head = None
+            self.deque.tail = None
+        else:
+            self.deque.head = self.deque.head.next
+        self.deque_size -= 1
+        return item
 
     def removeTail(self):
         if self.deque_size == 0:
