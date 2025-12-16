@@ -28,15 +28,25 @@ def test_addFront():
 
 def test_removeFront():
     deque = Deque()
-    deque.addTail(1)
-    deque.addTail(2)
-    assert deque.size() == 2
+    assert deque.removeFront() is None
+
+    deque.addFront(1)
     assert deque.removeFront() == 1
-    assert deque.removeFront() == 2
+
+    deque.addFront(2)
+    deque.addFront(3)
+    assert deque.size() == 2
+
+    assert deque.removeTail() == 2
+    assert deque.removeTail() == 3
+    assert deque.size() == 0
+    deque.addTail(1)
+    assert deque.removeTail() == 1
 
 
 def test_removeTail():
     deque = Deque()
+    assert deque.removeTail() is None
     deque.addTail(1)
     deque.addTail(2)
     assert deque.size() == 2
