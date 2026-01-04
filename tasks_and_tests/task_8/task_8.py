@@ -14,33 +14,33 @@ class HashTable:
 
     def seek_slot(self, value):
         index = self.hash_fun(value)
-
-        while index < self.size:
+        start_index = index
+        while True:
             if self.slots[index] is None:
                 return index
-
-            index += self.step
-
-        return None
+            index = (index + self.step) % self.size
+            if index == start_index:
+                return None
 
     def put(self, value):
         index = self.hash_fun(value)
-
-        while index < self.size:
+        start_index = index
+        while True:
             if self.slots[index] is None:
                 self.slots[index] = value
                 return index
-
-            index += self.step
-        return None
+            index = (index + self.step) % self.size
+            if index == start_index:
+                return None
 
     def find(self, value):
         index = self.hash_fun(value)
-
-        while index < self.size:
+        start_index = index
+        while True:
             if self.slots[index] == value:
                 return index
-
-            index += self.step
-
-        return None
+            if self.slots[index] is None:
+                return None
+            index = (index + self.step) % self.size
+            if index == start_index:
+                return None
