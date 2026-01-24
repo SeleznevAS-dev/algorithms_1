@@ -7,7 +7,7 @@ from .task_11 import BloomFilter
 class ModifiedBloomFilter(BloomFilter):
     def __init__(self, f_len, num_hash1=None, num_hash2=None):
         self.filter_len = f_len
-        self.bit_arr = ["0"] * f_len
+        self.bits = int(2 << (f_len - 1))
         self.num_hash1 = num_hash1 or 17
         self.num_hash2 = num_hash2 or 223
 
@@ -48,16 +48,11 @@ def test_MultiBloomFilter():
 # Lesson task number: 11.3
 # Short name: BloomFilterWithRemove
 class BloomFilterWithRemove(BloomFilter):
-    def _remove_mask_from_bit_arr(self, mask):
-        for i in range(-1, -len(mask) - 1, -1):
-            if mask[i] == "1" and self.bit_arr[i] == "1":
-                self.bit_arr[i] = "0"
-
     def remove(self, str1):
         mask1 = self.hash1(str1)
-        self._remove_mask_from_bit_arr(mask1)
+        self.bits = self.bits & ~mask1
         mask2 = self.hash2(str1)
-        self._remove_mask_from_bit_arr(mask2)
+        self.bits = self.bits & ~mask2
 
 
 def test_BloomFilterWithRemove():
@@ -74,13 +69,17 @@ def test_BloomFilterWithRemove():
 # Short name: BloomFilterReverse
 class BloomFilterReverse(BloomFilter):
     def get_original_num_range(self):
-        mn = 0
-        mx = 0
-        for i in range(self.filter_len - 1, -1, -1):
-            if self.bit_arr[i] == "1" and mn == 0:
-                mn = 2 ** (self.filter_len - i - 1)
-            elif self.bit_arr[i] == "1":
-                mx += 2 ** (self.filter_len - i - 1)
+        mn = self.filter_len
+        mx = -1
+
+        for i in range(self.filter_len):
+            bit_mask = 1 << i
+            if (self.bits & bit_mask) != 0:
+                if i < mn:
+                    mn = i
+                if i > mx:
+                    mx = i
+
         return mn, mx
 
 
